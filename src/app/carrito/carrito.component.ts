@@ -88,7 +88,7 @@ export class CarritoComponent {
             // Llamamos al PedidodetalleService para agregar el detalle del pedido
             this.pedidoDetalleService.agregarProducto(pedidoDetalle).subscribe(
               () => {
-                // Detalle agregado con éxito
+                console.log('Pedido agregado con éxito')
               },
               error => {
                 console.error('Error al agregar detalle de pedido:', error);
