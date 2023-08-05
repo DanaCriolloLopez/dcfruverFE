@@ -1,0 +1,8 @@
+/* Estilo para el div que contiene el form de editar-productos */
+.divlistap {
+    margin: 20px;
+    padding: 50px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebfce9;
+}

@@ -1,0 +1,69 @@
+<!-- Barra de menu -->
+<nav class="navbar navbar-light fixed-top" style="background-color: #c7e4d4">
+    <!-- Logo de la tienda -->
+    <a class="navbar-brand" href="#">
+        <img src="assets/images/logodcfruver.png" width="150" height="45" class="d-inline-block align-top" alt="">
+    </a>
+    <!-- div que contiene los botones del navbar -->
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="navbar-nav">
+            <a class="dropdown-item" [routerLink]="['/pedidos']">Pedidos</a>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div class="navbar-nav">
+            <a class="dropdown-item" [routerLink]="['/productos']">Productos</a>
+        </div>
+        &nbsp;
+        &nbsp;
+        <div style="width: 10px;"></div>
+        <button class="btn btn-success">Cerrar sesión</button>
+    </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- Div que contiene la información de la Lista de pedidos -->
+<div class="divlistap">
+    <h3>
+        <i class="fas fa-list-ul"></i> Lista de pedidos
+    </h3>
+
+    <div>
+        <div class="col-sm-12">
+            <br>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th> Id </th>
+                        <th> Cedula Cliente </th>
+                        <th> Fecha Pedido </th>
+                        <th> Total </th>
+                        <th> Estado </th>
+                        <th> Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pedido of pedidos | async">
+                        <td>{{ pedido.idpedido }}</td>
+                        <td>{{ pedido.cedulacliente }}</td>
+                        <td>{{ pedido.fechapedido }}</td>
+                        <td>{{ pedido.total }}</td>
+                        <td>{{ getEstadoTexto(pedido.estado) }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm" (click)="confirmarProducto(pedido.idpedido)">Confirmar</a>
+                            <a class="btn btn-danger btn-sm" (click)="rechazarProducto(pedido.idpedido)">Rechazar</a>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

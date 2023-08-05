@@ -1,0 +1,47 @@
+/* Estilos para el div que contiene la lista de pedidos */
+.divlistap {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebfce9;
+}
+
+.divlistap h3 {
+margin-top: 0;
+margin-bottom: 10px;
+text-align: center;
+}
+
+/*Estilos para la table */
+.table {
+    flex: 1; 
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tbody tr:nth-child(odd) {
+background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tbody tr:nth-child(even) {
+background-color: #f0f8ff;  /* Azul claro */
+}
+
+.table td,
+.table th {
+padding: 8px;
+text-align: center;
+border: 1px solid #d6d6d6;
+background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tfoot td {
+text-align: center;
+font-weight: bold;
+background-color: #f0f8ff; /* Azul claro */
+}

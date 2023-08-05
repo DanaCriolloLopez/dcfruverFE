@@ -1,0 +1,78 @@
+<!-- Barra de menu -->
+<nav class="navbar navbar-light fixed-top" style="background-color: #c7e4d4">
+  <!-- Logo de la tienda -->
+  <a class="navbar-brand" href="#">
+      <img src="assets/images/logodcfruver.png" width="150" height="45" class="d-inline-block align-top" alt="">
+  </a>
+  <!-- div que contiene los botones del navbar -->
+  <div class="d-flex justify-content-between align-items-center">
+      <div class="navbar-nav">
+          <a class="dropdown-item" [routerLink]="['/pedidos']">Pedidos</a>
+      </div>
+      &nbsp;
+      &nbsp;
+      <div class="navbar-nav">
+          <a class="dropdown-item" [routerLink]="['/productos']">Productos</a>
+      </div>
+      &nbsp;
+      &nbsp;
+      <div style="width: 10px;"></div>
+      <button class="btn btn-success">Cerrar sesión</button>
+  </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- Div que contiene la información de la Lista de productos -->
+<div class="divlistap">
+  <h3>
+    <i class="fas fa-box"></i> Lista de productos
+  </h3>
+
+  <div>
+    <div class="col-sm-12">
+      <!-- form que contiene el boton nuevo producto y que redirige al componente editar-prouctos -->
+      <form class="form-inline">
+          <a class="btn btn-success" [routerLink]="['/productos/agregar']">Nuevo Producto</a>
+      </form>
+      <br>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th> Id </th>
+              <th> Nombre </th>
+              <th> Categoria </th>
+              <th> Descripción </th>
+              <th> Precio </th>
+              <th> Stock </th>
+              <th> Imagen </th>
+              <th> Acciones </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productos | async">
+              <td>{{ producto.idproducto }}</td>
+              <td>{{ producto.nomproducto }}</td>
+              <td>{{ producto.categoriaproducto }}</td>
+              <td>{{ producto.descripcionproducto }}</td>
+              <td>{{ producto.precioproducto }}</td>
+              <td>{{ producto.stockproducto }}</td>
+              <td>{{ producto.imgproducto }}</td>
+              <td>
+                  <!-- boton Editar y que redirige al componente editar-prouctos -->
+                  <a class="btn btn-success btn-sm" [routerLink]="['/productos/editar/', producto.idproducto]">Editar</a>
+                  <a class="btn btn-danger btn-sm" (click)="borrarProducto(producto.idproducto)">Borrar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
