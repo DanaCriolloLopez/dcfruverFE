@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PedidoModel } from '../shared/pedido.model';
 import { PedidoService } from '../shared/pedido.service';
 import { Observable } from 'rxjs';
+import { CorreoModel } from '../shared/correo.model';
+import { ClienteService } from '../shared/cliente.service';
+import { CorreoService } from '../shared/correo.service';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -15,7 +18,7 @@ export class ListaPedidosComponent implements OnInit  {
   pedidos: Observable<PedidoModel[]> | undefined;
 
   // Inyectamos el servicio PedidoService en el constructor para poder usarlo en el componente
-  constructor(private pedidoService: PedidoService) { }
+  constructor(private pedidoService: PedidoService, private clienteService: ClienteService, private correoService: CorreoService) { }
 
   // Inicializamos la lista de pedidos
   ngOnInit(){
@@ -37,19 +40,72 @@ export class ListaPedidosComponent implements OnInit  {
   }
 
   // Función para confirmar un pedido
-  confirmarProducto(idpedido: string) {
-    this.pedidoService.confirmarPedido(idpedido).subscribe(data => { 
-          console.log("Pedido confirmado");
-          this.ngOnInit();
-        });
+  confirmarPedido(idpedido: string, cedulacliente: string) {
+    this.pedidoService.confirmarPedido(idpedido).subscribe(() => {
+      console.log('Pedido confirmado');
+
+      // Con la cédula del cliente obtenemos el número de cédula
+      this.clienteService.obtenerCorreo(cedulacliente).subscribe(
+        (response: any) => {
+          const cor = response.correocliente;
+          console.log(`Pedido confirmado ${cor}`);
+          const correo: CorreoModel = {
+            email: cor,
+            asunto: `DCFruver - Confirmación de pedido`,
+            mensaje: `Su pedido, con número ${idpedido}, ha sido confirmado`,
+          };
+          // Ya que tenemos el número de cédula  del cliente y la información del correo, lo enviamos
+          this.correoService.enviarCorreo(correo).subscribe(
+            () => {
+              console.log('Correo enviado con éxito');
+              this.ngOnInit();
+            },
+            (error) => {
+              console.log('Error al enviar el correo:', error);
+            }
+          );
+        },
+        (error) => {
+          console.log('Error al obtener el correo del cliente:', error);
+        }
+      );
+
+      this.ngOnInit();
+    });
   }
 
 // Función para rechazar un pedido
-  rechazarProducto(idpedido: string) {
+  rechazarPedido(idpedido: string, cedulacliente: string) {
     this.pedidoService.rechazarPedido(idpedido).subscribe(data => { 
           console.log("Pedido rechazado");
-          this.ngOnInit();
-        });
+      // Con la cédula del cliente obtenemos el número de cédula
+      this.clienteService.obtenerCorreo(cedulacliente).subscribe(
+        (response: any) => {
+          const cor = response.correocliente;
+          console.log(`Pedido confirmado ${cor}`);
+          const correo: CorreoModel = {
+            email: cor, 
+            asunto: `DCFruver - Pedido Rechazado`,
+            mensaje: `Su pedido, con número ${idpedido}, ha sido rechazado`,
+          };
+          // Ya que tenemos el número de cédula  del cliente y la información del correo, lo enviamos
+          this.correoService.enviarCorreo(correo).subscribe(
+            () => {
+              console.log('Correo enviado con éxito');
+              this.ngOnInit();
+            },
+            (error) => {
+              console.log('Error al enviar el correo:', error);
+            }
+          );
+        },
+        (error) => {
+          console.log('Error al obtener el correo del cliente:', error);
+        }
+      );
+
+      this.ngOnInit();
+      });
   }
   
 }

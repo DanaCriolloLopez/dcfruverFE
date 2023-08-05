@@ -55,8 +55,8 @@
                         <td>{{ pedido.total }}</td>
                         <td>{{ getEstadoTexto(pedido.estado) }}</td>
                         <td>
-                            <a class="btn btn-success btn-sm" (click)="confirmarProducto(pedido.idpedido)">Confirmar</a>
-                            <a class="btn btn-danger btn-sm" (click)="rechazarProducto(pedido.idpedido)">Rechazar</a>
+                            <a class="btn btn-success btn-sm" (click)="confirmarPedido(pedido.idpedido , pedido.cedulacliente)">Confirmar</a>
+                            <a class="btn btn-danger btn-sm" (click)="rechazarPedido(pedido.idpedido, pedido.cedulacliente)">Rechazar</a>
                         </td>
                         </tr>
                     </tbody>
