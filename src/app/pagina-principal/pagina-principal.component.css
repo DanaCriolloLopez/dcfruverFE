@@ -1,0 +1,28 @@
+/* EStilo para el titulo de la Tienda*/
+.ovalo {
+    background: linear-gradient(to right, #318656, #3ba7b0); /* Gama de color verde */
+    width: 500px; /* Ancho del óvalo */
+    height: 90px; /* Alto del óvalo */
+    border-radius: 50%; /* Hace que el contenedor sea un óvalo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Centra el óvalo horizontalmente */
+    margin-top: 50px; /* Ajusta el margen superior para centrar verticalmente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para el óvalo */
+}
+
+.titulo {
+    color: white; /* Color del texto en blanco */
+    font-size: 24px; /* Tamaño del texto */
+    text-align: center; /* Centra el texto dentro del óvalo */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra para el texto */
+}
+
+/*Estilo para el color del div que contiene los filtros */
+.filtro-verde-clarito {
+    background-color: #c7e4d4; /* Color verde claro */
+    padding: 10px; /* Añadimos un poco de espaciado interno para mejorar el aspecto */
+    border-radius: 5px; /* Agregamos bordes redondeados para un mejor aspecto */
+}
+

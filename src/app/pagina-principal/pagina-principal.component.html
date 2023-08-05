@@ -1,0 +1,84 @@
+<!-- Barra de menu -->
+<nav class="navbar navbar-light fixed-top" style="background-color: #c7e4d4">
+    <!-- Logo de la tienda -->
+    <a class="navbar-brand" href="#">
+        <img src="assets/images/logodcfruver.png" width="150" height="45" class="d-inline-block align-top" alt="">
+    </a>
+    <!-- div que contiene el botón carrito -->
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="navbar-nav">
+            <a class="btn btn-success" [routerLink]="['/carrito']"> <i class="fas fa-shopping-cart"></i> Carrito ({{ carrito.length }})</a>
+        </div>
+        <!-- Botón de inicio de sesión a la derecha -->
+        <div style="width: 10px;"></div>
+            <button class="btn btn-success">Iniciar sesión</button>
+        </div>
+</nav>
+<br>
+
+<!-- Div que contiene el titulo -->
+<div class="container">
+    <div class="ovalo">
+        <h1 class="titulo">Tienda de Frutas y Verduras</h1>
+    </div>      
+</div> 
+<br>
+
+<!-- div que contiene los filtros agregados en la página -->
+<div class="container filtro-verde-clarito">
+    <!-- div centra los filtros en la página -->
+    <div class="row justify-content-center align-items-center">
+        <!-- div filtro por nombre  -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="busqueda" class="mb-2">Buscar por nombre:</label>
+                <input type="text" class="form-control" id="busqueda" (input)="filtrarPorNombre($event)" placeholder="Escribe el nombre del producto">
+            </div>
+        </div>
+        <!-- div que filtra los productos por categoria haciendo uso del archivo .ts vinculado donde se encuentra la lógica de esta acción -->
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="categoria" class="mb-2">Filtrar por categoría:</label>
+                <select class="form-select" id="categoria" (change)="filtrarProductos($event)">
+                <option value="todas">Todas</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+                </select>
+            </div>
+        </div>
+        <!-- div que filtra los productos por precios haciendo uso del archivo .ts vinculado donde se encuentra la lógica de esta acción -->
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="rangoPrecio" class="mb-2">Filtrar por rango de precios:</label>
+                <select class="form-select" id="rangoPrecio" (change)="filtrarPorPrecio($event)">
+                <option value="todos">Todos</option>
+                <option value="0-10000">Menos de $10,000</option>
+                <option value="10000-20000">$10,000 - $20,000</option>
+                <option value="20000-50000">$20,000 - $50,000</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<!-- div que crea la lista de los productos a vender en la tienda presentaos en tarjetas -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let producto of productosFiltrados ">
+            <div class="card mb-3">
+                <img [src]="producto.imgproducto" class="card-img-top" alt="{{ producto.nomproducto }}">
+                <div class="card-body">
+                    <h5 class="card-title text-success">{{ producto.nomproducto }}</h5>
+                    <p class="card-text font-weight-bold text-muted">{{ producto.categoriaproducto }}</p>
+                    <p class="card-text precio">{{ producto.precioproducto  | currency:'COP' }}</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" (click)="agregarAlCarrito(producto)">Añadir al carrito</button>
+                            <button class="btn btn-info" type="button" (click)="mostrarModal(producto)">Detalle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

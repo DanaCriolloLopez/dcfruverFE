@@ -1,0 +1,85 @@
+/* Estilo para los botones */
+button {
+  background-color: #007B3E;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005E2E;
+}
+
+/* Estilos para el container que contiene la información del carrito */
+.carrito-container {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #ebfce9;
+}
+
+.carrito-container h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Estilo para la etiqueta select-client */ 
+.select-client {
+  margin-bottom: 20px;
+}
+/* Estilos para la información del cliente seleccionado */
+
+.cliente-info {
+  max-width: 400px;
+}
+
+.cliente-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cliente-card p {
+  margin: 5px 0;
+}
+
+/*Estilos para la table */
+
+.table {
+  flex: 1; 
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f0f8ff;  /* Azul claro */
+}
+
+.table td,
+.table th {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #d6d6d6;
+  background-color: #f0f8ff; /* Azul claro */
+}
+
+.table tfoot td {
+  text-align: center;
+  font-weight: bold;
+  background-color: #f0f8ff; /* Azul claro */
+}

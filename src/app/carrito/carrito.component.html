@@ -1,0 +1,93 @@
+<!-- Barra de menu -->
+<nav class="navbar navbar-light fixed-top" style="background-color: #c7e4d4">
+  <!-- Logo de la tienda -->
+  <a class="navbar-brand" href="#">
+      <img src="assets/images/logodcfruver.png" width="150" height="45" class="d-inline-block align-top" alt="">
+  </a>
+  <!-- div que contiene los botones del carrito -->
+  <div class="d-flex justify-content-between align-items-center">
+      <div class="navbar-nav">
+          <a class="btn btn-success" [routerLink]="['/pricipal']">Regresar</a>
+      </div>
+      <div style="width: 10px;"></div>
+      <!-- Botón de inicio de sesión a la derecha -->
+      <button class="btn btn-success">Iniciar sesión</button>
+  </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- Div que contiene la información del carrito de compras -->
+<div class="carrito-container">
+  <h3>
+    <i class="fas fa-shopping-cart"></i> Carrito de compras
+  </h3> 
+  <!-- div donde se busca al cliente seleccionado para hacer el pedido cuando haya al menos un producto en el carrito -->
+  <div *ngIf="carrito.length > 0" class="container">
+    <!-- div donde se escoge al cliente que hace el pedido -->
+    <div class="container">
+      <!-- div donde se selecciona al cliente -->
+      <div class="select-client">
+        <h4>Selecciona un cliente:</h4>
+        <select class="form-control-sm" [(ngModel)]="clienteSeleccionado" (ngModelChange)="seleccionarCliente($event)">
+          <option *ngFor="let cliente of clientes" [ngValue]="cliente">{{ cliente.nomcliente }}</option>
+        </select>
+      </div>
+      <!-- div donde se muestra la información del cliente seleccionado -->
+      <div *ngIf="clienteSeleccionado" class="cliente-info">
+        <div class="cliente-card">
+          <p><strong>Cédula:</strong> {{ clienteSeleccionado.cedulacliente }}</p>
+          <p><strong>Nombre:</strong> {{ clienteSeleccionado.nomcliente }}</p>
+          <p><strong>Dirección:</strong> {{ clienteSeleccionado.dircliente }}</p>
+          <p><strong>Teléfono:</strong> {{ clienteSeleccionado.telcliente }}</p>
+          <p><strong>Correo:</strong> {{ clienteSeleccionado.correocliente }}</p>
+        </div>
+      </div>
+    </div>
+  <!-- div donde se despliega en una table la información de los productos agregados al carrito -->
+    <div class="container">
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Imagén</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Subtotal</th>
+            <th>Acciones</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of carrito">
+            <td><img [src]="item.producto.imgproducto" width="70" height="70"  alt="{{ item.producto.nomproducto }}"></td>
+            <td>{{ item.producto.nomproducto }}</td>
+            <td>
+              <input class="form-control" type="number" min="1" max="{{ item.producto.stockproducto }}" [(ngModel)]="item.cantidad" (ngModelChange)="actualizarSubtotal(item)">
+            </td>
+            <td>{{ item.producto.precioproducto | currency:'COP ' }}</td>
+            <td>{{ (item.cantidad * item.producto.precioproducto) | currency:'COP ' }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="eliminarProducto(item)">Eliminar</button> <!-- Agregar el botón de eliminar -->
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right font-weight-bold">Total:</td>
+            <td>{{ calcularTotal() | currency:'COP ' }}</td>
+            <td><button class="btn btn-primary btn-sm" (click)="hacerPedido()">Hacer pedido</button></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <!-- div que se muestra si no hay productos en el carrito -->
+  <div *ngIf="carrito.length === 0">
+    <p class="text-muted">No hay productos en el carrito.</p>
+  </div>
+</div>
+
